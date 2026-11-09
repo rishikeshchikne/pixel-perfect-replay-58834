@@ -59,7 +59,7 @@ function MapPage() {
           ))}
         </div>
 
-        <div className="relative mt-6 aspect-[2/1] w-full overflow-hidden rounded-2xl border bg-surface">
+        <div className={cn("relative mt-6 aspect-[2/1] w-full overflow-hidden rounded-2xl border bg-surface", selected && "min-h-80 sm:min-h-0")}>
           <div
             className={cn(
               "absolute inset-0",
