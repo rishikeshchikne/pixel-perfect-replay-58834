@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Artifact content, quiz and timeline live as typed data in `src/lib/` (not the database): it is curated, source-cited reference content that every user shares.
+- All museum pages live under `src/routes/_authenticated/`; only `/auth` and `/reset-password` are public, because the brief requires login before entering.
+- User profiles are read client-side via RLS (own row only), created by a signup trigger from auth metadata.
