@@ -3,6 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 
 import { routeTree } from "@/routeTree.gen";
+import { ARTIFACTS } from "@/lib/artifacts";
 
 // Match routes without running loaders or rendering: loaders may need a server or
 // network the test run lacks, and jsdom never loads the stylesheets React waits on.
@@ -13,5 +14,21 @@ describe("App routing", () => {
     const matches = router.matchRoutes("/");
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+    expect(matches.at(-1)?.routeId).toBe("/");
+  });
+
+  it.each(["/", "/explore", "/map", "/academy", "/about", ...ARTIFACTS.map((a) => `/artifact/${a.id}`)])("opens %s without an authentication guard", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    const matches = router.matchRoutes(path);
+    expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+    for (const match of matches) {
+      const route = router.routesById[match.routeId];
+      expect(route?.options.beforeLoad).toBeUndefined();
+    }
+  });
+
+  it.each(["/auth", "/reset-password", "/profile"])("removes account route %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes(path).at(-1)?.routeId).toBe(rootRouteId);
   });
 });

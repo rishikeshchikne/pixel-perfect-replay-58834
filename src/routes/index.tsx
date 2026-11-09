@@ -6,7 +6,7 @@ import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, IMAGES, getArtifact } from "@/lib/artifacts";
 import { OriginalSources } from "@/components/museum/OriginalSources";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "RE:SPACE — The Mission Ended. The Story Didn't." },

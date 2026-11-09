@@ -9,247 +9,147 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedAboutRouteImport } from './routes/_authenticated/about'
-import { Route as AuthenticatedAcademyRouteImport } from './routes/_authenticated/academy'
-import { Route as AuthenticatedExploreRouteImport } from './routes/_authenticated/explore'
-import { Route as AuthenticatedMapRouteImport } from './routes/_authenticated/map'
-import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
-import { Route as AuthenticatedArtifactIdRouteImport } from './routes/_authenticated/artifact.$id'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AcademyRouteImport } from './routes/academy'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as MapRouteImport } from './routes/map'
+import { Route as ArtifactIdRouteImport } from './routes/artifact.$id'
 
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAboutRoute = AuthenticatedAboutRouteImport.update({
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAcademyRoute = AuthenticatedAcademyRouteImport.update({
+const AcademyRoute = AcademyRouteImport.update({
   id: '/academy',
   path: '/academy',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedExploreRoute = AuthenticatedExploreRouteImport.update({
+const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedMapRoute = AuthenticatedMapRouteImport.update({
+const MapRoute = MapRouteImport.update({
   id: '/map',
   path: '/map',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedArtifactIdRoute = AuthenticatedArtifactIdRouteImport.update({
+const ArtifactIdRoute = ArtifactIdRouteImport.update({
   id: '/artifact/$id',
   path: '/artifact/$id',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthenticatedIndexRoute
-  '/auth': typeof AuthRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/about': typeof AuthenticatedAboutRoute
-  '/academy': typeof AuthenticatedAcademyRoute
-  '/explore': typeof AuthenticatedExploreRoute
-  '/map': typeof AuthenticatedMapRoute
-  '/profile': typeof AuthenticatedProfileRoute
-  '/artifact/$id': typeof AuthenticatedArtifactIdRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/explore': typeof ExploreRoute
+  '/map': typeof MapRoute
+  '/artifact/$id': typeof ArtifactIdRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/about': typeof AuthenticatedAboutRoute
-  '/academy': typeof AuthenticatedAcademyRoute
-  '/explore': typeof AuthenticatedExploreRoute
-  '/map': typeof AuthenticatedMapRoute
-  '/profile': typeof AuthenticatedProfileRoute
-  '/': typeof AuthenticatedIndexRoute
-  '/artifact/$id': typeof AuthenticatedArtifactIdRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/explore': typeof ExploreRoute
+  '/map': typeof MapRoute
+  '/artifact/$id': typeof ArtifactIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/reset-password': typeof ResetPasswordRoute
-  '/_authenticated/about': typeof AuthenticatedAboutRoute
-  '/_authenticated/academy': typeof AuthenticatedAcademyRoute
-  '/_authenticated/explore': typeof AuthenticatedExploreRoute
-  '/_authenticated/map': typeof AuthenticatedMapRoute
-  '/_authenticated/profile': typeof AuthenticatedProfileRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/artifact/$id': typeof AuthenticatedArtifactIdRoute
+  '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/academy': typeof AcademyRoute
+  '/explore': typeof ExploreRoute
+  '/map': typeof MapRoute
+  '/artifact/$id': typeof ArtifactIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/auth'
-    | '/reset-password'
-    | '/about'
-    | '/academy'
-    | '/explore'
-    | '/map'
-    | '/profile'
-    | '/artifact/$id'
+  fullPaths: '/' | '/about' | '/academy' | '/explore' | '/map' | '/artifact/$id'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/auth'
-    | '/reset-password'
-    | '/about'
-    | '/academy'
-    | '/explore'
-    | '/map'
-    | '/profile'
-    | '/'
-    | '/artifact/$id'
+  to: '/' | '/about' | '/academy' | '/explore' | '/map' | '/artifact/$id'
   id:
     | '__root__'
-    | '/_authenticated'
-    | '/auth'
-    | '/reset-password'
-    | '/_authenticated/about'
-    | '/_authenticated/academy'
-    | '/_authenticated/explore'
-    | '/_authenticated/map'
-    | '/_authenticated/profile'
-    | '/_authenticated/'
-    | '/_authenticated/artifact/$id'
+    | '/'
+    | '/about'
+    | '/academy'
+    | '/explore'
+    | '/map'
+    | '/artifact/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  ResetPasswordRoute: typeof ResetPasswordRoute
+  IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AcademyRoute: typeof AcademyRoute
+  ExploreRoute: typeof ExploreRoute
+  MapRoute: typeof MapRoute
+  ArtifactIdRoute: typeof ArtifactIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/': {
-      id: '/_authenticated/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/about': {
-      id: '/_authenticated/about'
+    '/about': {
+      id: '/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AuthenticatedAboutRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/academy': {
-      id: '/_authenticated/academy'
+    '/academy': {
+      id: '/academy'
       path: '/academy'
       fullPath: '/academy'
-      preLoaderRoute: typeof AuthenticatedAcademyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AcademyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/explore': {
-      id: '/_authenticated/explore'
+    '/explore': {
+      id: '/explore'
       path: '/explore'
       fullPath: '/explore'
-      preLoaderRoute: typeof AuthenticatedExploreRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/map': {
-      id: '/_authenticated/map'
+    '/map': {
+      id: '/map'
       path: '/map'
       fullPath: '/map'
-      preLoaderRoute: typeof AuthenticatedMapRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/profile': {
-      id: '/_authenticated/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedProfileRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/artifact/$id': {
-      id: '/_authenticated/artifact/$id'
+    '/artifact/$id': {
+      id: '/artifact/$id'
       path: '/artifact/$id'
       fullPath: '/artifact/$id'
-      preLoaderRoute: typeof AuthenticatedArtifactIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof ArtifactIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAboutRoute: typeof AuthenticatedAboutRoute
-  AuthenticatedAcademyRoute: typeof AuthenticatedAcademyRoute
-  AuthenticatedExploreRoute: typeof AuthenticatedExploreRoute
-  AuthenticatedMapRoute: typeof AuthenticatedMapRoute
-  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedArtifactIdRoute: typeof AuthenticatedArtifactIdRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAboutRoute: AuthenticatedAboutRoute,
-  AuthenticatedAcademyRoute: AuthenticatedAcademyRoute,
-  AuthenticatedExploreRoute: AuthenticatedExploreRoute,
-  AuthenticatedMapRoute: AuthenticatedMapRoute,
-  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedArtifactIdRoute: AuthenticatedArtifactIdRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
-  ResetPasswordRoute: ResetPasswordRoute,
+  IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AcademyRoute: AcademyRoute,
+  ExploreRoute: ExploreRoute,
+  MapRoute: MapRoute,
+  ArtifactIdRoute: ArtifactIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

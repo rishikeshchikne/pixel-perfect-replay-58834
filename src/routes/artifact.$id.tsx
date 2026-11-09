@@ -5,7 +5,7 @@ import { ArtifactCard } from "@/components/museum/ArtifactCard";
 import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, getArtifact } from "@/lib/artifacts";
 
-export const Route = createFileRoute("/_authenticated/artifact/$id")({
+export const Route = createFileRoute("/artifact/$id")({
   loader: ({ params }) => {
     const a = getArtifact(params.id);
     if (!a) throw notFound();
