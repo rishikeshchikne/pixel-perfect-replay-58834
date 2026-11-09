@@ -4,13 +4,17 @@ import { PageHeader } from "@/components/museum/PageHeader";
 import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, IMAGES } from "@/lib/artifacts";
 
-export const Route = createFileRoute("/_authenticated/about")({
+export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About & Sources — RE:SPACE" },
       { name: "description", content: "Why RE:SPACE exists, who made it, and the NASA sources behind every story." },
       { property: "og:title", content: "About & Sources — RE:SPACE" },
       { property: "og:description", content: "Every explorer deserves to be remembered." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: IMAGES.earthrise.src },
+      { name: "twitter:image", content: IMAGES.earthrise.src },
     ],
   }),
   component: About,
@@ -58,7 +62,7 @@ function About() {
           <ul className="mt-5 space-y-3 text-sm">
             {ARTIFACTS.flatMap((a) => a.sources).map((s) => (
               <li key={s.url}>
-                <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex gap-2 text-muted-foreground hover:text-foreground">
+                <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex gap-2 text-muted-foreground hover:text-foreground">
                   <ExternalLink className="mt-0.5 size-3.5 shrink-0" /> {s.label}
                 </a>
               </li>
@@ -70,7 +74,7 @@ function About() {
           <ul className="mt-5 space-y-3 text-sm">
             {images.map((im) => (
               <li key={im.url}>
-                <a href={im.url} target="_blank" rel="noreferrer" className="inline-flex gap-2 text-muted-foreground hover:text-foreground">
+                <a href={im.url} target="_blank" rel="noopener noreferrer" className="inline-flex gap-2 text-muted-foreground hover:text-foreground">
                   <ExternalLink className="mt-0.5 size-3.5 shrink-0" /> {im.credit}
                 </a>
               </li>

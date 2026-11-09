@@ -31,5 +31,6 @@ use the editor.
 
 ## Project rules
 - Artifact content, quiz and timeline live as typed data in `src/lib/` (not the database): it is curated, source-cited reference content that every user shares.
-- All museum pages live under `src/routes/_authenticated/`; only `/auth` and `/reset-password` are public, because the brief requires login before entering.
-- User profiles are read client-side via RLS (own row only), created by a signup trigger from auth metadata.
+- Museum pages are top-level public routes in `src/routes/`, with navigation and footer shared by the root layout, so every page opens without a session.
+- The museum does not import authentication clients or attach bearer tokens; leave integration-managed scaffolding untouched and inactive.
+- Official homepage resources live as typed data in `src/lib/resources.ts`; artifact references and image credits derive from the curated artifact records to prevent mismatches.

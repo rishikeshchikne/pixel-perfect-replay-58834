@@ -9,7 +9,6 @@ const LINKS = [
   { to: "/map", label: "Ghost Map" },
   { to: "/academy", label: "Academy" },
   { to: "/about", label: "About" },
-  { to: "/profile", label: "Profile" },
 ] as const;
 
 export function Logo() {
