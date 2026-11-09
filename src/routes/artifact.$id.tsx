@@ -5,7 +5,7 @@ import { ArtifactCard } from "@/components/museum/ArtifactCard";
 import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, getArtifact } from "@/lib/artifacts";
 
-export const Route = createFileRoute("/artifact/$id")({
+export const Route = createFileRoute("/_authenticated/artifact/$id")({
   loader: ({ params }) => {
     const a = getArtifact(params.id);
     if (!a) throw notFound();
@@ -61,7 +61,7 @@ function ArtifactPage() {
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">{a.intro}</p>
           <p className="mt-6 text-xs text-muted-foreground">
             {a.image.kind === "artist concept" ? "Artist concept" : "Photo"}:{" "}
-            <a href={a.image.url} target="_blank" rel="noreferrer" className="underline-offset-2 hover:underline">{a.image.credit}</a>
+            <a href={a.image.url} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">{a.image.credit}</a>
           </p>
         </div>
       </header>
@@ -90,7 +90,7 @@ function ArtifactPage() {
                   <img src={a.gallery.src} alt={a.gallery.alt} loading="lazy" className="max-h-[520px] w-full object-cover" />
                   <figcaption className="bg-card px-5 py-3 text-xs text-muted-foreground">
                     {a.gallery.kind === "artist concept" ? "Artist concept — not a photograph. " : ""}
-                    <a href={a.gallery.url} target="_blank" rel="noreferrer" className="hover:underline">{a.gallery.credit}</a>
+                    <a href={a.gallery.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{a.gallery.credit}</a>
                   </figcaption>
                 </figure>
               )}

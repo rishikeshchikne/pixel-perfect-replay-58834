@@ -8,13 +8,17 @@ import { PageHeader } from "@/components/museum/PageHeader";
 import { ARTIFACTS, filterArtifacts, IMAGES, type Filter } from "@/lib/artifacts";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_authenticated/explore")({
+export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
       { title: "The Archive of Forgotten Machines — RE:SPACE" },
       { name: "description", content: "Search and filter NASA landers, rovers and equipment left on the Moon and Mars." },
       { property: "og:title", content: "The Archive of Forgotten Machines — RE:SPACE" },
       { property: "og:description", content: "Every machine has a mission. Every mission leaves a story." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: IMAGES.earthrise.src },
+      { name: "twitter:image", content: IMAGES.earthrise.src },
     ],
   }),
   component: Explore,

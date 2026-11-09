@@ -5,13 +5,15 @@ import { PageHeader } from "@/components/museum/PageHeader";
 import { ARTIFACTS, TIMELINE, getArtifact, type Destination } from "@/lib/artifacts";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_authenticated/map")({
+export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
       { title: "Ghost Map & Mission Timeline — RE:SPACE" },
       { name: "description", content: "See where NASA machines remain on the Moon and Mars, and follow their missions through time." },
       { property: "og:title", content: "Ghost Map & Mission Timeline — RE:SPACE" },
       { property: "og:description", content: "Where humanity left its footprints on other worlds." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: MapPage,

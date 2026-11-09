@@ -8,13 +8,17 @@ import { QUIZ, scoreQuiz } from "@/lib/quiz";
 import { IMAGES } from "@/lib/artifacts";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_authenticated/academy")({
+export const Route = createFileRoute("/academy")({
   head: () => ({
     meta: [
       { title: "Explorer Academy — RE:SPACE" },
       { name: "description", content: "Learn the basics of space archaeology and test yourself with a quiz on NASA's left-behind machines." },
       { property: "og:title", content: "Explorer Academy — RE:SPACE" },
       { property: "og:description", content: "Become a space archaeologist. Explore. Discover. Learn. Remember." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: IMAGES.roverFamily.src },
+      { name: "twitter:image", content: IMAGES.roverFamily.src },
     ],
   }),
   component: Academy,
@@ -40,7 +44,8 @@ function Academy() {
   const [answers, setAnswers] = useState<(number | null)[]>(() => QUIZ.map(() => null));
   const [idx, setIdx] = useState(0);
   const done = idx >= QUIZ.length;
-  const q = QUIZ[Math.min(idx, QUIZ.length - 1)]!;
+  const q = QUIZ[Math.min(idx, QUIZ.length - 1)];
+  if (!q) return null;
   const picked = answers[idx];
   const score = scoreQuiz(answers);
 

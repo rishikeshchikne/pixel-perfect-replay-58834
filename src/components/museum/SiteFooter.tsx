@@ -27,10 +27,10 @@ export function SiteFooter() {
         <div>
           <p className="eyebrow text-science">NASA sources</p>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li><a className="hover:text-foreground" href="https://science.nasa.gov/" target="_blank" rel="noreferrer">NASA Science</a></li>
-            <li><a className="hover:text-foreground" href="https://images.nasa.gov/" target="_blank" rel="noreferrer">NASA Image Library (image credits)</a></li>
-            <li><a className="hover:text-foreground" href="https://nssdc.gsfc.nasa.gov/" target="_blank" rel="noreferrer">NSSDCA archive</a></li>
-            <li><a className="hover:text-foreground" href="https://www.spaceappschallenge.org/" target="_blank" rel="noreferrer">Space Apps Challenge</a></li>
+            <li><a className="hover:text-foreground" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Science</a></li>
+            <li><a className="hover:text-foreground" href="https://images.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Image Library (image credits)</a></li>
+            <li><a className="hover:text-foreground" href="https://nssdc.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer">NSSDCA archive</a></li>
+            <li><a className="hover:text-foreground" href="https://www.spaceappschallenge.org/" target="_blank" rel="noopener noreferrer">Space Apps Challenge</a></li>
           </ul>
         </div>
       </div>
