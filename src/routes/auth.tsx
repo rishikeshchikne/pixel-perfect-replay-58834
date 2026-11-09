@@ -29,6 +29,7 @@ export const Route = createFileRoute("/auth")({
 });
 
 type Mode = "login" | "signup" | "forgot";
+type Errs = Partial<Record<"fullName" | "displayName" | "email" | "password" | "confirm" | "form", string>>;
 
 const signupSchema = z
   .object({
@@ -47,13 +48,13 @@ const loginSchema = z.object({
 
 function AuthPage() {
   const [mode, setMode] = useState<Mode>("login");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Errs>({});
   const [loading, setLoading] = useState(false);
   const [sentTo, setSentTo] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const fieldErrors = (issues: z.ZodIssue[]) =>
-    setErrors(Object.fromEntries(issues.map((i) => [String(i.path[0]), i.message])));
+    setErrors(Object.fromEntries(issues.map((i) => [String(i.path[0]), i.message])) as Errs);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -235,7 +236,7 @@ function AuthPage() {
   );
 }
 
-function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
+function Field({ id, label, error, children }: { id: string; label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id} className="text-xs text-muted-foreground">{label}</Label>

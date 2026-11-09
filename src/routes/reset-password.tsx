@@ -40,8 +40,9 @@ function ResetPage() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-    if ((f.password ?? "").length < 8) return setError("Use at least 8 characters");
+    const fd = new FormData(e.currentTarget);
+    const f = { password: String(fd.get("password") ?? ""), confirm: String(fd.get("confirm") ?? "") };
+    if (f.password.length < 8) return setError("Use at least 8 characters");
     if (f.password !== f.confirm) return setError("Passwords don't match");
     setLoading(true);
     const { error } = await supabase.auth.updateUser({ password: f.password });

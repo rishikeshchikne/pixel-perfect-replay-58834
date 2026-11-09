@@ -40,7 +40,7 @@ function Academy() {
   const [answers, setAnswers] = useState<(number | null)[]>(() => QUIZ.map(() => null));
   const [idx, setIdx] = useState(0);
   const done = idx >= QUIZ.length;
-  const q = QUIZ[idx];
+  const q = QUIZ[Math.min(idx, QUIZ.length - 1)]!;
   const picked = answers[idx];
   const score = scoreQuiz(answers);
 

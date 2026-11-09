@@ -18,7 +18,7 @@ export function displayNameOf(p: ReturnType<typeof useProfile>["data"]) {
   if (!p) return "";
   return (
     p.profile?.display_name ||
-    (p.user.user_metadata?.display_name as string | undefined) ||
+    (p.user.user_metadata?.["display_name"] as string | undefined) ||
     p.user.email?.split("@")[0] ||
     "Explorer"
   );

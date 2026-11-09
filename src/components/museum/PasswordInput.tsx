@@ -19,7 +19,7 @@ export function PasswordInput(props: InputHTMLAttributes<HTMLInputElement>) {
   );
 }
 
-export function FieldError({ msg }: { msg?: string }) {
+export function FieldError({ msg }: { msg?: string | undefined }) {
   if (!msg) return null;
   return <p role="alert" className="text-xs text-destructive">{msg}</p>;
 }
