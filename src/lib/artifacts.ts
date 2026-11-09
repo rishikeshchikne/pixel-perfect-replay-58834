@@ -93,8 +93,8 @@ export const ARTIFACTS: Artifact[] = [
       "I was only ever meant to be the half that stays. I held them steady while the dust settled, and when the fire lit above me, I let them go. The flag has faded, the footprints have not. I still face the Earth, every day, from the place where people first arrived.",
     sources: [
       { label: "NASA — Apollo 11 Mission Overview", url: "https://www.nasa.gov/mission/apollo-11/" },
-      { label: "NASA Science — Apollo 11", url: "https://science.nasa.gov/mission/apollo-11/" },
-      { label: "LRO images of the Apollo landing sites", url: "https://www.nasa.gov/image-article/apollo-landing-sites-revisited/" },
+      { label: "NASA SVS — Apollo Landing Sites, with Shadows", url: "https://svs.gsfc.nasa.gov/3620/" },
+      { label: "NASA SVS — Revisiting Apollo Landing Sites", url: "https://svs.gsfc.nasa.gov/31052" },
     ],
   },
   {
@@ -143,7 +143,6 @@ export const ARTIFACTS: Artifact[] = [
     speak:
       "They folded me like a letter and opened me on a world with no roads. I carried two people, their tools and their laughter across dust no one had touched. My batteries are empty now. My camera still looks at the place where they left.",
     sources: [
-      { label: "NASA — The Lunar Roving Vehicle", url: "https://www.nasa.gov/history/45-years-ago-apollo-15-lunar-roving-vehicle/" },
       { label: "NASA NSSDCA — Apollo Lunar Roving Vehicle", url: "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_lrv.html" },
       { label: "NASA — Apollo 15", url: "https://www.nasa.gov/mission/apollo-15/" },
     ],
@@ -162,7 +161,7 @@ export const ARTIFACTS: Artifact[] = [
     coords: [{ lat: -3.0, lon: -23.4, note: "Surveyor 3 / Apollo 12 site" }],
     image: {
       src: nasa("as12-48-7136"),
-      alt: "Astronaut Alan Bean examining Surveyor 3 with the Apollo 12 lunar module in the background",
+      alt: "Astronaut Charles Conrad Jr. examining Surveyor 3 with the Apollo 12 lunar module in the background",
       credit: "NASA — AS12-48-7136",
       url: "https://images.nasa.gov/details/as12-48-7136",
       kind: "photo",
@@ -232,7 +231,6 @@ export const ARTIFACTS: Artifact[] = [
       "I was small enough to carry in your arms. Every day I rolled a few centimetres further than anything from Earth had ever rolled. Then the voice from the lander went quiet. I don't know if I kept driving. I like to think I did.",
     sources: [
       { label: "NASA Science — Mars Pathfinder", url: "https://science.nasa.gov/mission/mars-pathfinder/" },
-      { label: "NASA JPL — Mars Pathfinder & Sojourner", url: "https://www.jpl.nasa.gov/missions/mars-pathfinder-sojourner-rover/" },
       { label: "NASA NSSDCA — Mars Pathfinder Rover", url: "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MESURPR" },
     ],
   },
@@ -273,8 +271,7 @@ export const ARTIFACTS: Artifact[] = [
       "They gave me ninety days. I took more than two thousand. When my wheel stopped turning I dragged it, and the scar it left in the soil was white with the memory of water. I rest now at Troy, facing a sun that comes and goes.",
     sources: [
       { label: "NASA Science — Spirit rover", url: "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" },
-      { label: "NASA JPL — Mars Exploration Rover", url: "https://www.jpl.nasa.gov/missions/mars-exploration-rover-spirit-mer/" },
-      { label: "NASA — Spirit silica discovery (2007)", url: "https://mars.nasa.gov/news/mars-rover-spirit-unearths-surprise-evidence-of-wetter-past/" },
+      { label: "NASA Science — Silica-Rich Soil Found by Spirit (2007)", url: "https://science.nasa.gov/photojournal/silica-rich-soil-found-by-spirit/" },
     ],
   },
 ];
