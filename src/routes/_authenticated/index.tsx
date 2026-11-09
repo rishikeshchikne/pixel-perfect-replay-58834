@@ -4,24 +4,27 @@ import { Button } from "@/components/ui/button";
 import { ArtifactCard } from "@/components/museum/ArtifactCard";
 import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, IMAGES, getArtifact } from "@/lib/artifacts";
-import { displayNameOf, useProfile } from "@/hooks/use-profile";
+import { OriginalSources } from "@/components/museum/OriginalSources";
 
-export const Route = createFileRoute("/_authenticated/")({
+export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "RE:SPACE — The Mission Ended. The Story Didn't." },
       { name: "description", content: "Discover the NASA landers, rovers and instruments that remain on the Moon and Mars." },
       { property: "og:title", content: "RE:SPACE — The Mission Ended. The Story Didn't." },
       { property: "og:description", content: "A digital museum of NASA machines left on the Moon and Mars." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: ARTIFACTS[0]?.image.src },
+      { name: "twitter:image", content: ARTIFACTS[0]?.image.src },
     ],
   }),
   component: Home,
 });
 
 function Home() {
-  const { data } = useProfile();
-  const name = displayNameOf(data);
-  const lm = getArtifact("apollo-11-descent-stage")!;
+  const lm = getArtifact("apollo-11-descent-stage");
+  if (!lm) return null;
   const worlds = [
     { title: "The Moon", body: "Apollo descent stages, three lunar rovers and robotic landers rest where they stopped.", img: lm.image, to: "/explore" as const, cta: "Explore lunar artifacts" },
     { title: "Mars", body: "Rovers and landers sit silent in dust storms and winter, still on the surface they explored.", img: IMAGES.marsHills, to: "/explore" as const, cta: "Explore Martian artifacts" },
@@ -36,7 +39,7 @@ function Home() {
         <div className="absolute inset-0 overlay-fade" />
         <div className="absolute inset-0 starfield opacity-40" aria-hidden />
         <div className="relative mx-auto w-full max-w-7xl px-5">
-          <p className="eyebrow text-science animate-rise">{name ? `Welcome back, ${name}` : "Welcome back"}</p>
+          <p className="eyebrow text-science animate-rise">RE:SPACE · A digital museum of space archaeology</p>
           <h1 className="mt-5 max-w-4xl text-5xl font-bold leading-[0.95] md:text-7xl lg:text-8xl animate-rise" style={{ animationDelay: "120ms" }}>
             The mission ended.
             <br />
@@ -115,6 +118,8 @@ function Home() {
           <p className="mt-8 text-xs text-muted-foreground">Photo: {IMAGES.marsHills.credit}, from the Spirit rover</p>
         </Reveal>
       </section>
+
+      <OriginalSources />
 
       <section className="mx-auto max-w-7xl px-5 py-28">
         <Reveal className="rounded-3xl border bg-card p-10 md:p-16 shadow-card">

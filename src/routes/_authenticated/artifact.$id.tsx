@@ -5,7 +5,7 @@ import { ArtifactCard } from "@/components/museum/ArtifactCard";
 import { Reveal } from "@/components/museum/Reveal";
 import { ARTIFACTS, getArtifact } from "@/lib/artifacts";
 
-export const Route = createFileRoute("/_authenticated/artifact/$id")({
+export const Route = createFileRoute("/artifact/$id")({
   loader: ({ params }) => {
     const a = getArtifact(params.id);
     if (!a) throw notFound();
@@ -21,6 +21,8 @@ export const Route = createFileRoute("/_authenticated/artifact/$id")({
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
         ...(a ? [{ property: "og:image", content: a.image.src }, { name: "twitter:image", content: a.image.src }] : []),
       ],
     };
@@ -121,19 +123,51 @@ function ArtifactPage() {
             <p className="eyebrow text-science">Current known status</p>
             <p className="mt-3 leading-relaxed">{a.status}</p>
           </div>
-          <div className="rounded-2xl border bg-card p-6">
-            <p className="eyebrow text-primary">Sources</p>
-            <ul className="mt-4 space-y-3 text-sm">
-              {a.sources.map((s) => (
-                <li key={s.url}>
-                  <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex items-start gap-2 text-muted-foreground hover:text-foreground">
-                    <ExternalLink className="mt-0.5 size-3.5 shrink-0" /> {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </aside>
+      </section>
+
+      <section aria-labelledby="research-references" className="border-t bg-surface py-20">
+        <div className="mx-auto max-w-7xl px-5">
+          <Reveal>
+            <p className="eyebrow text-science">The evidence behind the story</p>
+            <h2 id="research-references" className="mt-4 text-3xl font-bold md:text-4xl">RESEARCH & REFERENCES</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[2fr_1fr]">
+            <div>
+              <h3 className="font-display text-lg font-semibold text-primary">Official mission research</h3>
+              <ul className="mt-5 space-y-4">
+                {a.sources.map((source) => (
+                  <li key={source.url} className="rounded-lg border bg-card p-5 transition-colors hover:border-science/40">
+                    <a href={source.url} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
+                      <ExternalLink className="mt-1 size-4 shrink-0 text-science" />
+                      <span className="min-w-0">
+                        <span className="font-medium group-hover:text-primary">{source.label}</span>
+                        <span className="mt-2 block break-all text-xs leading-relaxed text-muted-foreground">{source.url}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-display text-lg font-semibold text-science">NASA image credits</h3>
+              <ul className="mt-5 space-y-5">
+                {[a.image, ...(a.gallery ? [a.gallery] : [])].map((image) => (
+                  <li key={image.url}>
+                    <a href={image.url} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3">
+                      <ExternalLink className="mt-1 size-4 shrink-0 text-science" />
+                      <span className="min-w-0">
+                        <span className="text-sm group-hover:text-primary">{image.credit}</span>
+                        <span className="mt-1 block text-xs text-muted-foreground">{image.kind === "artist concept" ? "Artist concept — not a photograph" : "NASA photograph"}</span>
+                        <span className="mt-2 block break-all text-xs leading-relaxed text-muted-foreground">{image.url}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="relative overflow-hidden border-y bg-surface py-28">
