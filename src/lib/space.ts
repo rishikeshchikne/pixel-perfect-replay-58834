@@ -72,6 +72,55 @@ export function flightFov(base: number, t: number, widen = 14): number {
   return base + Math.sin(Math.PI * Math.min(Math.max(t, 0), 1)) * widen;
 }
 
+/** World-space azimuth (radians) of a direction, measured the same way as longitude: +X = 0, -Z = +90°. */
+export function azimuthOf(dir: Vec3): number {
+  return Math.atan2(-dir[2], dir[0]);
+}
+
+/** Planet spin (rotation about +Y, radians) that turns the given east longitude toward a view direction. */
+export function spinToFace(lonDeg: number, viewDir: Vec3): number {
+  return azimuthOf(viewDir) - (lonDeg * Math.PI) / 180;
+}
+
+const norm = (v: Vec3): Vec3 => {
+  const l = Math.hypot(v[0], v[1], v[2]) || 1;
+  return [v[0] / l, v[1] / l, v[2] / l];
+};
+
+/** Default direction from each body's centre to the camera (chosen for a partly sunlit view). */
+export const VIEW_DIR: Record<Destination, Vec3> = {
+  Moon: norm([0.35, 0.18, 1]),
+  Mars: norm([0.12, 0.16, 1]),
+};
+
+/** Longitude turned toward the camera when each world first appears. */
+export const FACING_LON: Record<Destination, number> = { Moon: 5, Mars: -40 };
+
+export interface MapPin {
+  key: string;
+  artifactId: string;
+  lat: number;
+  lon: number;
+  note: string;
+}
+
+export interface SurfaceFeature {
+  world: Destination;
+  name: string;
+  lat: number;
+  lon: number;
+}
+
+/** Well-known reference features (published centre coordinates, rounded) for orientation. */
+export const SURFACE_FEATURES: SurfaceFeature[] = [
+  { world: "Mars", name: "Olympus Mons", lat: 18.65, lon: -133.8 },
+  { world: "Mars", name: "Valles Marineris", lat: -13.9, lon: -59.2 },
+  { world: "Mars", name: "Hellas Planitia", lat: -42.4, lon: 70.5 },
+  { world: "Moon", name: "Mare Tranquillitatis", lat: 8.5, lon: 31.4 },
+  { world: "Moon", name: "Oceanus Procellarum", lat: 18.4, lon: -57.4 },
+  { world: "Moon", name: "Tycho crater", lat: -43.31, lon: -11.36 },
+];
+
 export interface TextureCredit {
   body: string;
   dataset: string;
