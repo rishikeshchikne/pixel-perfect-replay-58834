@@ -560,8 +560,8 @@ function Scene({ world, paused, pins, selectedKey, onSelectPin, apiRef, onReady 
   return (
     <>
       <color attach="background" args={["#05070D"]} />
-      <ambientLight intensity={0.05} />
-      <hemisphereLight args={["#9fb4d0", "#1a1410", 0.06]} />
+      <ambientLight intensity={0.12} />
+      <hemisphereLight args={["#9fb4d0", "#1a1410", 0.14]} />
       <SkyDome />
       <Stars radius={700} depth={500} count={7000} factor={5} saturation={0.25} fade speed={0.4} />
       <Sun />
