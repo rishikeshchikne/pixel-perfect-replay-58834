@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { BODY_RADIUS, MEAN_RADIUS_KM, azimuthOf, flightDuration, latLonToVec3, spinToFace } from "@/lib/space";
 
-const close = (a: number[], b: number[]) => a.forEach((v, i) => expect(v).toBeCloseTo(b[i], 6));
+const close = (a: number[], b: number[]) => a.forEach((v, i) => expect(v).toBeCloseTo(b[i] ?? NaN, 6));
 
 describe("3D Ghost Map maths", () => {
   it("places 0°N 0°E on +X, 90°E on -Z and the north pole on +Y", () => {
