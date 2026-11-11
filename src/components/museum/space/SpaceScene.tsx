@@ -80,9 +80,11 @@ interface Sim {
 const v3 = (v: Vec3) => new THREE.Vector3(v[0], v[1], v[2]);
 const toVec3 = (v: THREE.Vector3): Vec3 => [v.x, v.y, v.z];
 
-function defaultView(body: Destination) {
+function defaultView(body: Destination, aspect = 1) {
   const centre = v3(BODY_POSITION[body]);
-  const pos = v3(VIEW_DIR[body]).multiplyScalar(BODY_RADIUS[body] * VIEW_DISTANCE_RADII).add(centre);
+  // Tall, narrow screens (phones) need the camera further back so the whole globe fits.
+  const fit = THREE.MathUtils.clamp(1.15 / aspect, 1, 2.2);
+  const pos = v3(VIEW_DIR[body]).multiplyScalar(BODY_RADIUS[body] * VIEW_DISTANCE_RADII * fit).add(centre);
   return { centre, pos };
 }
 
@@ -421,7 +423,7 @@ function CameraRig({ sim, world, apiRef }: { sim: Sim; world: Destination; apiRe
 
   // Intro: drift in from deep space toward the Moon.
   useEffect(() => {
-    const { pos } = defaultView(world);
+    const { pos } = defaultView(world, camera.aspect);
     const startAt = pos.clone().add(new THREE.Vector3(-28, 16, 70));
     camera.position.copy(startAt);
     camera.lookAt(v3(BODY_POSITION[world]));
@@ -432,7 +434,7 @@ function CameraRig({ sim, world, apiRef }: { sim: Sim; world: Destination; apiRe
 
   useEffect(() => {
     if (first.current) { first.current = false; return; }
-    startFlight(world, defaultView(world).pos, { mode: "travel" });
+    startFlight(world, defaultView(world, camera.aspect).pos, { mode: "travel" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [world]);
 
@@ -446,7 +448,7 @@ function CameraRig({ sim, world, apiRef }: { sim: Sim; world: Destination; apiRe
         const d = THREE.MathUtils.clamp(offset.length() * factor, r * MIN_DISTANCE_RADII, r * MAX_DISTANCE_RADII);
         startFlight(body, centre.clone().add(offset.setLength(d)), { mode: "orbit", dur: sim.reducedMotion ? 0.01 : 0.55 });
       },
-      reset: () => startFlight(sim.body, defaultView(sim.body).pos, { mode: "orbit", dur: sim.reducedMotion ? 0.01 : 1.6 }),
+      reset: () => startFlight(sim.body, defaultView(sim.body, camera.aspect).pos, { mode: "orbit", dur: sim.reducedMotion ? 0.01 : 1.6 }),
       focusPin: (pin) => {
         const body = sim.body;
         const group = sim.spinGroups[body];
