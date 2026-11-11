@@ -34,3 +34,4 @@ use the editor.
 - Museum pages are top-level public routes in `src/routes/`, with navigation and footer shared by the root layout, so every page opens without a session.
 - The museum does not import authentication clients or attach bearer tokens; leave integration-managed scaffolding untouched and inactive.
 - Official homepage resources live as typed data in `src/lib/resources.ts`; artifact references and image credits derive from the curated artifact records to prevent mismatches.
+- The Ghost Map 3D scene is lazy-loaded client-only (`src/components/museum/space/`), with pure coordinate maths and texture credits in `src/lib/space.ts`; devices without WebGL get the schematic fallback.
