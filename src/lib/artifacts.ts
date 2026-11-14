@@ -90,7 +90,7 @@ export const ARTIFACTS: Artifact[] = [
       "Proved humans could land, work and return from the lunar surface.",
     ],
     speak:
-      "I was only ever meant to be the half that stays. I held them steady while the dust settled, and when the fire lit above me, I let them go. The flag they planted fell in the blast of my upper half leaving, but the paths they walked can still be seen from orbit. I still face the Earth, every day, from the place where people first arrived.",
+      "I was only ever meant to be the half that stays. I held them steady while the dust settled, and when the fire lit above me, I let them go. The flag they planted was knocked over when they lifted off, but the paths they walked can still be seen from orbit. I still face the Earth, every day, from the place where people first arrived.",
     sources: [
       { label: "NASA — Apollo 11 Mission Overview", url: "https://www.nasa.gov/mission/apollo-11/" },
       { label: "NASA SVS — Apollo Landing Sites, with Shadows", url: "https://svs.gsfc.nasa.gov/3620/" },
