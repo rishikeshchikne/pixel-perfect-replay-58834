@@ -90,7 +90,7 @@ export const ARTIFACTS: Artifact[] = [
       "Proved humans could land, work and return from the lunar surface.",
     ],
     speak:
-      "I was only ever meant to be the half that stays. I held them steady while the dust settled, and when the fire lit above me, I let them go. The flag has faded, the footprints have not. I still face the Earth, every day, from the place where people first arrived.",
+      "I was only ever meant to be the half that stays. I held them steady while the dust settled, and when the fire lit above me, I let them go. The flag they planted fell in the blast of my upper half leaving, but the paths they walked can still be seen from orbit. I still face the Earth, every day, from the place where people first arrived.",
     sources: [
       { label: "NASA — Apollo 11 Mission Overview", url: "https://www.nasa.gov/mission/apollo-11/" },
       { label: "NASA SVS — Apollo Landing Sites, with Shadows", url: "https://svs.gsfc.nasa.gov/3620/" },
@@ -136,7 +136,7 @@ export const ARTIFACTS: Artifact[] = [
       { title: "After the missions", body: "There was no room to bring the rovers home. Each was parked near its landing site, with its camera pointed so it could film the crew's departure." },
     ],
     discoveries: [
-      "Let Apollo 15 crews reach Hadley Rille and collect the \"Genesis Rock,\" a sample of ancient lunar crust.",
+      "Let the Apollo 15 crew reach the edge of Hadley Rille and Spur crater, where they collected the \"Genesis Rock,\" a sample of ancient lunar crust.",
       "Greatly expanded the area astronauts could sample on each mission.",
       "Showed that crewed surface vehicles could work on another world — a lesson for future lunar rovers.",
     ],
@@ -295,7 +295,7 @@ export const TIMELINE = [
   { date: "20 Apr 1967", title: "Surveyor 3 lands", body: "Lands in the Ocean of Storms and digs into lunar soil.", id: "surveyor-3", dest: "Moon" },
   { date: "20 Jul 1969", title: "Apollo 11", body: "Eagle lands at Tranquility Base; the descent stage stays behind.", id: "apollo-11-descent-stage", dest: "Moon" },
   { date: "19 Nov 1969", title: "Apollo 12 visits Surveyor 3", body: "Conrad and Bean bring pieces of Surveyor 3 home.", id: "surveyor-3", dest: "Moon" },
-  { date: "30 Jul 1971", title: "Apollo 15", body: "First Lunar Roving Vehicle is driven on the Moon.", id: "lunar-roving-vehicle", dest: "Moon" },
+  { date: "31 Jul 1971", title: "Apollo 15", body: "First Lunar Roving Vehicle is driven on the Moon, the day after landing.", id: "lunar-roving-vehicle", dest: "Moon" },
   { date: "21 Apr 1972", title: "Apollo 16", body: "Second rover explores the Descartes Highlands.", id: "lunar-roving-vehicle", dest: "Moon" },
   { date: "11 Dec 1972", title: "Apollo 17", body: "Last crewed lunar landing and last rover, at Taurus–Littrow.", id: "lunar-roving-vehicle", dest: "Moon" },
   { date: "4 Jul 1997", title: "Mars Pathfinder", body: "Pathfinder lands; Sojourner rolls off two days later.", id: "sojourner", dest: "Mars" },
