@@ -57,6 +57,8 @@ function MapPage() {
   const [activeEvent, setActiveEvent] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
+  const [sceneFailed, setSceneFailed] = useState(false);
+  const flat = webgl === false || sceneFailed;
   const apiRef = useRef<SceneApi | null>(null);
 
   useEffect(() => setWebgl(hasWebGL()), []);
@@ -110,6 +112,7 @@ function MapPage() {
             <ClientOnly fallback={<div className="absolute inset-0 bg-background" />}>
               {webgl && (
                 <SceneErrorBoundary
+                  onError={() => setSceneFailed(true)}
                   fallback={
                     <>
                       <SchematicMap world={world} pins={pins} selectedKey={selected?.key ?? null} onSelect={selectPin} />
@@ -140,10 +143,10 @@ function MapPage() {
           )}
 
           <span className="eyebrow pointer-events-none absolute left-4 top-4 z-20 text-muted-foreground">
-            {world} · {webgl === false ? "schematic" : "3D view"}
+            {world} · {flat ? "schematic" : "3D view"}
           </span>
 
-          {webgl !== false && (
+          {!flat && (
             <div className="absolute right-3 top-3 z-20 flex flex-col gap-2">
               <CtrlButton label="Zoom in" onClick={() => apiRef.current?.zoom(0.75)}><Plus className="size-4" /></CtrlButton>
               <CtrlButton label="Zoom out" onClick={() => apiRef.current?.zoom(1.33)}><Minus className="size-4" /></CtrlButton>
@@ -171,7 +174,7 @@ function MapPage() {
         </div>
 
         <div className="mt-4">
-          <p className="eyebrow text-muted-foreground">Landing sites on the {world}</p>
+          <p className="eyebrow text-muted-foreground">Landing sites on {world === "Moon" ? "the Moon" : "Mars"}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {pins.map((p) => (
               <button

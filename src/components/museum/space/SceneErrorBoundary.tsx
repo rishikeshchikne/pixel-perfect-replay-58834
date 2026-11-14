@@ -1,6 +1,6 @@
 import { Component, type ReactNode } from "react";
 
-type Props = { fallback: ReactNode; children: ReactNode };
+type Props = { fallback: ReactNode; children: ReactNode; onError?: () => void };
 type State = { failed: boolean };
 
 /**
@@ -16,6 +16,7 @@ export class SceneErrorBoundary extends Component<Props, State> {
 
   override componentDidCatch(error: unknown) {
     console.warn("Ghost Map 3D scene unavailable, showing schematic map instead.", error);
+    this.props.onError?.();
   }
 
   override render() {
