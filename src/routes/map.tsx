@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Info, Minus, Pause, Play, Plus, RotateCcw, X } from "lucide-react";
 import { PageHeader } from "@/components/museum/PageHeader";
 import { SchematicMap } from "@/components/museum/space/SchematicMap";
+import { SceneErrorBoundary } from "@/components/museum/space/SceneErrorBoundary";
 import { ARTIFACTS, TIMELINE, getArtifact, type Destination } from "@/lib/artifacts";
 import { TEXTURE_CREDITS, type MapPin } from "@/lib/space";
 import type { SceneApi } from "@/components/museum/space/SpaceScene";
@@ -108,6 +109,20 @@ function MapPage() {
           ) : (
             <ClientOnly fallback={<div className="absolute inset-0 bg-background" />}>
               {webgl && (
+                <SceneErrorBoundary
+                  fallback={(retry) => (
+                    <>
+                      <SchematicMap world={world} pins={pins} selectedKey={selected?.key ?? null} onSelect={selectPin} />
+                      <button
+                        type="button"
+                        onClick={retry}
+                        className="eyebrow absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full glass px-4 py-2 text-science hover:text-foreground"
+                      >
+                        3D view couldn't load · Try again
+                      </button>
+                    </>
+                  )}
+                >
                 <Suspense fallback={<div className="absolute inset-0 grid place-items-center bg-background"><p className="eyebrow text-science">Preparing 3D space…</p></div>}>
                   <SpaceScene
                     world={world}
@@ -119,6 +134,7 @@ function MapPage() {
                     onReady={() => {}}
                   />
                 </Suspense>
+                </SceneErrorBoundary>
               )}
             </ClientOnly>
           )}
