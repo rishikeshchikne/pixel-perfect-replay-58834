@@ -145,6 +145,8 @@ export const ARTIFACTS: Artifact[] = [
     sources: [
       { label: "NASA NSSDCA — Apollo Lunar Roving Vehicle", url: "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_lrv.html" },
       { label: "NASA — Apollo 15", url: "https://www.nasa.gov/mission/apollo-15/" },
+      { label: "NASA — Apollo 16", url: "https://www.nasa.gov/mission/apollo-16/" },
+      { label: "NASA — Apollo 17", url: "https://www.nasa.gov/mission/apollo-17/" },
     ],
   },
   {
