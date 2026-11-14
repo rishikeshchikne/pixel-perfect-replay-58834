@@ -42,6 +42,17 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    // After a new version is published, an open tab can ask for code files that no longer
+    // exist. Reload once to fetch the current version instead of showing an error.
+    const msg = error instanceof Error ? error.message : String(error);
+    if (/dynamically imported module|Importing a module script failed|Loading chunk/i.test(msg)) {
+      const key = `respace-reload:${window.location.pathname}`;
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, "1");
+        window.location.reload();
+        return;
+      }
+    }
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 

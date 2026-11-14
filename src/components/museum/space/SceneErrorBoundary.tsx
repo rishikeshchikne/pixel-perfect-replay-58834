@@ -1,6 +1,6 @@
 import { Component, type ReactNode } from "react";
 
-type Props = { fallback: (retry: () => void) => ReactNode; children: ReactNode };
+type Props = { fallback: ReactNode; children: ReactNode };
 type State = { failed: boolean };
 
 /**
@@ -18,9 +18,7 @@ export class SceneErrorBoundary extends Component<Props, State> {
     console.warn("Ghost Map 3D scene unavailable, showing schematic map instead.", error);
   }
 
-  retry = () => this.setState({ failed: false });
-
   render() {
-    return this.state.failed ? this.props.fallback(this.retry) : this.props.children;
+    return this.state.failed ? this.props.fallback : this.props.children;
   }
 }
