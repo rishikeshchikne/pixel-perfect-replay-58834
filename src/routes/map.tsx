@@ -142,9 +142,11 @@ function MapPage() {
             </ClientOnly>
           )}
 
-          <span className="eyebrow pointer-events-none absolute left-4 top-4 z-20 text-muted-foreground">
-            {world} · {flat ? "schematic" : "3D view"}
-          </span>
+          {!flat && (
+            <span className="eyebrow pointer-events-none absolute left-4 top-4 z-20 text-muted-foreground">
+              {world} · 3D view
+            </span>
+          )}
 
           {!flat && (
             <div className="absolute right-3 top-3 z-20 flex flex-col gap-2">
