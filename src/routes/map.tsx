@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Info, Minus, Pause, Play, Plus, RotateCcw, X } from "lucide-react";
 import { PageHeader } from "@/components/museum/PageHeader";
 import { SchematicMap } from "@/components/museum/space/SchematicMap";
+import { SceneErrorBoundary } from "@/components/museum/space/SceneErrorBoundary";
 import { ARTIFACTS, TIMELINE, getArtifact, type Destination } from "@/lib/artifacts";
 import { TEXTURE_CREDITS, type MapPin } from "@/lib/space";
 import type { SceneApi } from "@/components/museum/space/SpaceScene";
@@ -56,6 +57,8 @@ function MapPage() {
   const [activeEvent, setActiveEvent] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
+  const [sceneFailed, setSceneFailed] = useState(false);
+  const flat = webgl === false || sceneFailed;
   const apiRef = useRef<SceneApi | null>(null);
 
   useEffect(() => setWebgl(hasWebGL()), []);
@@ -108,6 +111,21 @@ function MapPage() {
           ) : (
             <ClientOnly fallback={<div className="absolute inset-0 bg-background" />}>
               {webgl && (
+                <SceneErrorBoundary
+                  onError={() => setSceneFailed(true)}
+                  fallback={
+                    <>
+                      <SchematicMap world={world} pins={pins} selectedKey={selected?.key ?? null} onSelect={selectPin} />
+                      <button
+                        type="button"
+                        onClick={() => window.location.reload()}
+                        className="eyebrow absolute bottom-3 left-1/2 z-20 -translate-x-1/2 rounded-full glass px-4 py-2 text-science hover:text-foreground"
+                      >
+                        3D view couldn't load · Try again
+                      </button>
+                    </>
+                  }
+                >
                 <Suspense fallback={<div className="absolute inset-0 grid place-items-center bg-background"><p className="eyebrow text-science">Preparing 3D space…</p></div>}>
                   <SpaceScene
                     world={world}
@@ -119,15 +137,18 @@ function MapPage() {
                     onReady={() => {}}
                   />
                 </Suspense>
+                </SceneErrorBoundary>
               )}
             </ClientOnly>
           )}
 
-          <span className="eyebrow pointer-events-none absolute left-4 top-4 z-20 text-muted-foreground">
-            {world} · {webgl === false ? "schematic" : "3D view"}
-          </span>
+          {!flat && (
+            <span className="eyebrow pointer-events-none absolute left-4 top-4 z-20 text-muted-foreground">
+              {world} · 3D view
+            </span>
+          )}
 
-          {webgl !== false && (
+          {!flat && (
             <div className="absolute right-3 top-3 z-20 flex flex-col gap-2">
               <CtrlButton label="Zoom in" onClick={() => apiRef.current?.zoom(0.75)}><Plus className="size-4" /></CtrlButton>
               <CtrlButton label="Zoom out" onClick={() => apiRef.current?.zoom(1.33)}><Minus className="size-4" /></CtrlButton>
@@ -155,7 +176,7 @@ function MapPage() {
         </div>
 
         <div className="mt-4">
-          <p className="eyebrow text-muted-foreground">Landing sites on the {world}</p>
+          <p className="eyebrow text-muted-foreground">Landing sites on {world === "Moon" ? "the Moon" : "Mars"}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {pins.map((p) => (
               <button
